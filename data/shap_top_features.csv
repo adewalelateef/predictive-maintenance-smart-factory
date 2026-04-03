@@ -1,0 +1,21 @@
+feature_name,mean_abs_shap,feature_index
+Rotational speed _rpm,1.3655572,2
+power_proxy,1.2020938,41
+torque_x_toolwear,0.87203884,38
+temp_difference,0.8646849,40
+time_since_last_tool_change,0.6882574,6
+torque_per_rpm,0.513208,39
+Torque _Nm_rolling_std_5,0.4357977,9
+Tool wear _min,0.38408712,4
+Torque _Nm,0.37112486,3
+Tool wear _min_rolling_mean_10,0.34576416,35
+Tool wear _min_rolling_mean_5,0.2835282,32
+Air temperature _K_rolling_std_10,0.27632672,30
+Process temperature _K_rolling_std_10,0.2615866,24
+Torque _Nm_rolling_max_10,0.23622966,13
+cumulative_tool_wear,0.2106364,5
+Rotational speed _rpm_rolling_std_10,0.2100106,18
+Torque _Nm_rolling_mean_5,0.18304676,8
+Torque _Nm_rolling_mean_10,0.1756789,11
+tool_wear_rate,0.16685462,42
+Air temperature _K_rolling_mean_5,0.16233876,26
