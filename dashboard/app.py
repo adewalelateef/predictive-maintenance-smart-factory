@@ -1,15 +1,14 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 import joblib
-import shap
-import matplotlib.pyplot as plt
+import sys
+import os
 
-st.set_page_config(
-    page_title="Smart Factory Predictive Maintenance",
-    page_icon="🏭",
-    layout="wide"
-)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.pipeline import apply_feature_engineering
+
+st.set_page_config(page_title="Smart Factory Predictive Maintenance", page_icon="🏭", layout="wide")
 
 st.title("🏭 Smart Factory Predictive Maintenance System")
 st.markdown("**IIoT Sensor Data • Tuned XGBoost • SHAP Explainability**")
@@ -17,134 +16,153 @@ st.caption("Aerospace CNC Machine Failure Prediction")
 
 # Sidebar
 st.sidebar.header("Navigation")
-page = st.sidebar.radio("Go to", ["🏠 Home", "🔮 Make Prediction", "📊 SHAP Explainability", "🔬 What-if Simulator", "💰 Business Impact"])
+page = st.sidebar.radio("Go to", ["🏠 Home", "🔮 Make Prediction", "🔬 What-if Simulator", "📊 SHAP Explainability", "💰 Business Impact"])
 
 st.sidebar.markdown("---")
 st.sidebar.info("Model: Tuned XGBoost (Optuna)")
 
-# ====================== EXPECTED COLUMNS ======================
-EXPECTED_COLUMNS = [
-    "Air temperature _K", "Process temperature _K", "Rotational speed _rpm",
-    "Torque _Nm", "Tool wear _min"
-]
-
-# ====================== HELPER FUNCTIONS ======================
-def clean_column_names(df):
-    df.columns = [str(col).replace('[', '_').replace(']', '').replace('<', '').replace('>', '').strip() 
-                  for col in df.columns]
-    return df
-
-def validate_data(df):
-    missing = [col for col in EXPECTED_COLUMNS if col not in df.columns]
-    if missing:
-        return False, missing
-    return True, None
-
-def apply_feature_engineering(df):
-    df = df.copy()
-    df = clean_column_names(df)
-    
-    # Time-based features
-    df['cumulative_tool_wear'] = df['Tool wear _min'].cumsum()
-    df['tool_wear_diff'] = df['Tool wear _min'].diff().fillna(0)
-    df['is_tool_change'] = (df['tool_wear_diff'] < -80).astype(int)
-    df['time_since_last_tool_change'] = df.groupby((df['is_tool_change'] == 1).cumsum())['Tool wear _min'].cumsum()
-    
-    # Interaction features
-    df['torque_x_toolwear'] = df['Torque _Nm'] * df['Tool wear _min']
-    df['torque_per_rpm'] = df['Torque _Nm'] / (df['Rotational speed _rpm'] + 1)
-    df['temp_difference'] = df['Process temperature _K'] - df['Air temperature _K']
-    df['power_proxy'] = df['Torque _Nm'] * df['Rotational speed _rpm']
-    
-    # Rolling features
-    for col in ['Torque _Nm', 'Tool wear _min']:
-        df[f'{col}_rolling_mean_5'] = df[col].rolling(window=5, min_periods=1).mean()
-        df[f'{col}_rolling_std_5'] = df[col].rolling(window=5, min_periods=1).std()
-    
-    return df
-
-# ====================== LOAD MODEL ======================
+# Load Model
 @st.cache_resource
 def load_model():
     try:
-        model = joblib.load('../src/models/final_xgb_model.pkl')  # We'll save the model here later
-        st.success("✅ Model loaded successfully")
+        model = joblib.load('src/models/final_xgb_model.pkl')
+        st.sidebar.success("✅ Model loaded successfully")
         return model
     except:
-        st.warning("Model not found yet. Using placeholder.")
+        st.sidebar.error("❌ Model not found")
         return None
 
 model = load_model()
 
-# ====================== HOME PAGE ======================
+# ====================== PAGES ======================
 if page == "🏠 Home":
-    col1, col2 = st.columns(2)
-    with col1:
-        st.subheader("Project Overview")
-        st.write("End-to-end predictive maintenance dashboard for aerospace CNC machines.")
+    st.subheader("Project Overview")
+    st.write("End-to-end predictive maintenance dashboard for aerospace CNC machines.")
+    if model is not None:
         st.success("✅ Model is ready")
-    with col2:
-        st.subheader("Capabilities")
-        st.markdown("- Real-time failure prediction\n- SHAP explainability\n- What-if simulator\n- Business impact calculator")
+    else:
+        st.warning("Model not loaded yet")
 
-# ====================== MAKE PREDICTION PAGE ======================
 elif page == "🔮 Make Prediction":
     st.header("🔮 Make Failure Prediction")
     
-    st.info("""
-    **Note**: This model expects CNC machine sensor data with columns similar to the AI4I 2020 dataset 
-    (Air temperature, Process temperature, Rotational speed, Torque, Tool wear, etc.).
-    """)
-    
-    tab1, tab2 = st.tabs(["📤 Upload New Data", "📋 Use Sample Data"])
-    
-    with tab1:
-        uploaded_file = st.file_uploader("Upload your IIoT sensor CSV file", type=["csv"])
-        
-        if uploaded_file is not None:
-            try:
-                raw_data = pd.read_csv(uploaded_file)
-                st.success(f"Uploaded {raw_data.shape[0]} rows")
+    if st.button("🚀 Run Prediction on Sample Data (raw ai4i2020.csv)", type="primary"):
+        try:
+            df = pd.read_csv("data/ai4i2020.csv")
+            st.success("Sample raw data loaded")
+            
+            with st.spinner("Applying feature engineering..."):
+                processed_data = apply_feature_engineering(df)
+            
+            st.success("✅ Feature engineering completed!")
+            
+            if model is not None:
+                model_features = model.feature_names_in_
+                available_features = [f for f in model_features if f in processed_data.columns]
+                X_pred = processed_data[available_features].iloc[[0]]
                 
-                is_valid, missing = validate_data(raw_data)
-                if not is_valid:
-                    st.error(f"Missing required columns: {missing}")
-                else:
-                    with st.spinner("Applying feature engineering and making prediction..."):
-                        processed_data = apply_feature_engineering(raw_data)
-                        
-                        if model is not None:
-                            # For now, use only the features the model was trained on (simplified)
-                            # In the next step we'll map them properly
-                            st.success("✅ Prediction ready (model integration in progress)")
-                            st.dataframe(processed_data.head())
-                        else:
-                            st.warning("Model not loaded yet.")
-                            
-            except Exception as e:
-                st.error(f"Error: {e}")
-    
-    with tab2:
-        if st.button("Load Sample Data"):
-            st.success("Sample data loaded")
-            st.info("Prediction pipeline will run here")
+                prediction = model.predict(X_pred, validate_features=False)[0]
+                probability = model.predict_proba(X_pred, validate_features=False)[0][1]
+                
+                st.subheader("Prediction Result")
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    if prediction == 1:
+                        st.error(f"⚠️ FAILURE PREDICTED")
+                    else:
+                        st.success(f"✅ No Failure Predicted")
+                
+                with col2:
+                    st.metric("Failure Probability", f"{probability:.1%}")
+                
+                st.dataframe(X_pred)
+        except Exception as e:
+            st.error(f"Error: {str(e)}")
 
     st.markdown("---")
-    st.subheader("Prediction Result")
-    st.info("Prediction gauge, probability, and SHAP will appear here after full integration.")
-
-# Placeholder pages
-elif page == "📊 SHAP Explainability":
-    st.header("📊 SHAP Explainability")
-    st.info("SHAP plots coming soon.")
+    st.info("Tip: The first few rows usually show 0% probability because they are normal operation.")
 
 elif page == "🔬 What-if Simulator":
     st.header("🔬 What-if Simulator")
-    st.info("Interactive simulator coming soon.")
+    st.markdown("**Adjust sensor values** and instantly see how failure risk changes.")
 
-elif page == "💰 Business Impact":
-    st.header("💰 Business Impact Calculator")
-    st.info("Business impact calculator coming soon.")
+    if model is None:
+        st.error("Model not loaded")
+        st.stop()
+
+    # Sensor Inputs
+    st.subheader("Current Sensor Readings")
+    col1, col2 = st.columns(2)
+
+    with col1:
+        air_temp = st.slider("Air Temperature [K]", 290.0, 310.0, 298.1, step=0.1)
+        process_temp = st.slider("Process Temperature [K]", 300.0, 320.0, 308.6, step=0.1)
+        rpm = st.slider("Rotational Speed [rpm]", 1000, 3000, 1551, step=10)
+    with col2:
+        torque = st.slider("Torque [Nm]", 10.0, 80.0, 42.8, step=0.1)
+        tool_wear = st.slider("Tool Wear [min]", 0, 300, 0, step=1)
+
+    # Create input row
+    input_data = pd.DataFrame({
+        'Air temperature [K]': [air_temp],
+        'Process temperature [K]': [process_temp],
+        'Rotational speed [rpm]': [rpm],
+        'Torque [Nm]': [torque],
+        'Tool wear [min]': [tool_wear]
+    })
+
+    with st.spinner("Running feature engineering & prediction..."):
+        processed = apply_feature_engineering(input_data)
+        
+        model_features = model.feature_names_in_
+        available = [f for f in model_features if f in processed.columns]
+        X_pred = processed[available]
+        
+        prediction = model.predict(X_pred, validate_features=False)[0]
+        probability = model.predict_proba(X_pred, validate_features=False)[0][1]
+
+    # ====================== COLOR-CODED RESULT ======================
+    st.subheader("Prediction Result")
+
+    if probability < 0.20:
+        st.success("🟢 SAFE — No immediate action needed")
+    elif probability < 0.60:
+        st.warning("🟡 WARNING — Monitor closely, risk is increasing")
+    else:
+        st.error("🔴 HIGH RISK — Failure is likely, take preventive action")
+
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        if prediction == 1:
+            st.error("⚠️ FAILURE PREDICTED")
+        else:
+            st.success("✅ No Failure Predicted")
+    with col2:
+        st.metric("Failure Probability", f"{probability:.1%}")
+
+    # ====================== KEY RISK DRIVERS ======================
+    st.subheader("Key Risk Drivers")
+
+    plot_col1, plot_col2 = st.columns(2)
+
+    with plot_col1:
+        stress = processed['torque_x_toolwear'].iloc[0]
+        st.metric("⚙️ Mechanical Stress (Torque × Tool Wear)", f"{stress:.1f}")
+        st.progress(min(stress / 8000, 1.0))
+        st.caption("Strongest predictor of failure")
+
+    with plot_col2:
+        power = processed['power_proxy'].iloc[0]
+        st.metric("⚡ Power Proxy (Torque × RPM)", f"{power:,.0f}")
+        st.progress(min(power / 100000, 1.0))
+        st.caption("Overall mechanical load")
+
+    st.caption("**Insight**: High mechanical stress combined with worn tools is the strongest driver of failure in this model.")
+
+
+else:
+    st.info(f"{page} page is under construction.")
 
 st.markdown("---")
-st.caption("Built as part of Personal Industry 4.0 Project | Focused on CNC machine sensor data")
+st.caption("Built as part of Personal Industry 4.0 Project")
