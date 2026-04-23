@@ -17,6 +17,8 @@
 
 ## 🎯 Overview
 
+### 🚀 **[Try it Live →](https://predictive-maintenance-smart-factory.streamlit.app)**
+
 ![Quick Start](assets/quick_start.svg)
 
 This project implements an **Industry 4.0** solution for predictive maintenance in smart factories. Using machine learning and SHAP explainability, it predicts failures in CNC milling machines **before they occur**, enabling:
@@ -82,8 +84,8 @@ This project implements an **Industry 4.0** solution for predictive maintenance 
 - **NumPy** - Numerical computing
 - **Matplotlib & Plotly** - Data visualization
 
-### Infrastructure
-- **Docker** - Containerization (optional)
+### Deployment
+- **Streamlit Community Cloud** - Live application hosting
 - **Python 3.11+** - Core language
 
 ---
@@ -146,12 +148,7 @@ streamlit run dashboard/app.py
 
 The dashboard will open at **`http://localhost:8501`** 🎉
 
-### Alternative: Docker Deployment
-
-```bash
-docker build -t smart-factory-ml .
-docker run -p 8501:8501 smart-factory-ml
-```
+Or visit the **[live online version →](https://predictive-maintenance-smart-factory.streamlit.app)** (no installation needed!)
 
 ---
 
@@ -321,35 +318,21 @@ Top contributing factors for failure prediction:
 
 ---
 
-## 🚀 Deployment
+## 🌐 Live Dashboard
+
+### 🚀 **[Access the Live App](https://predictive-maintenance-smart-factory.streamlit.app)** 
+
+The application is deployed on **Streamlit Community Cloud** and is publicly accessible. No installation required!
 
 ### Local Development
+
+To run locally:
+
 ```bash
 streamlit run dashboard/app.py
 ```
 
-### Docker Deployment
-```bash
-docker build -t smart-factory-ml .
-docker run -p 8501:8501 smart-factory-ml
-```
-
-### Cloud Options
-- **AWS EC2**: Traditional VM deployment
-- **AWS ECS/Fargate**: Containerized orchestration
-- **Google Cloud Run**: Serverless deployment
-- **Azure Container Instances**: Microsoft cloud
-- **Heroku**: Simple PaaS deployment
-- **DigitalOcean App Platform**: Developer-friendly
-
-See [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) for detailed cloud deployment guide.
-
-### Environment Variables
-```bash
-STREAMLIT_SERVER_PORT=8501
-STREAMLIT_SERVER_ADDRESS=0.0.0.0
-STREAMLIT_SERVER_HEADLESS=true
-```
+The dashboard will open at **`http://localhost:8501`**
 
 ---
 

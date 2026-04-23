@@ -57,8 +57,8 @@
   <!-- Step 5: Share -->
   <circle cx="700" cy="150" r="40" class="circle"/>
   <text x="700" y="155" text-anchor="middle" class="step-num">5</text>
-  <text x="700" y="210" text-anchor="middle" class="step-text">Deploy & Share</text>
-  <text x="700" y="228" text-anchor="middle" font-family="Arial" font-size="11" fill="#0099ff">Docker/Cloud</text>
+  <text x="700" y="210" text-anchor="middle" class="step-text">Use Dashboard</text>
+  <text x="700" y="228" text-anchor="middle" font-family="Arial" font-size="11" fill="#0099ff">Predictions</text>
   
   <!-- Bottom section: Commands -->
   <rect x="50" y="280" width="900" height="100" fill="#112240" stroke="#00d4ff" stroke-width="1" rx="5"/>
