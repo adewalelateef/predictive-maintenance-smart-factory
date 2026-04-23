@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a192f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#112240;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0099ff;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="1200" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="0" x2="1200" y2="0" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="0" y1="50" x2="1200" y2="50" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="0" y1="100" x2="1200" y2="100" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="0" y1="150" x2="1200" y2="150" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1200" y2="200" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="0" y1="250" x2="1200" y2="250" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="0" y1="300" x2="1200" y2="300" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="0" y1="350" x2="1200" y2="350" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="0" y1="400" x2="1200" y2="400" stroke="#00d4ff" stroke-width="1"/>
+  </g>
+  
+  <!-- Decorative elements - Factory silhouettes -->
+  <g opacity="0.1">
+    <!-- Factory buildings on left -->
+    <rect x="50" y="150" width="40" height="100" fill="#00d4ff"/>
+    <rect x="70" y="120" width="30" height="130" fill="#00d4ff"/>
+    <rect x="90" y="140" width="35" height="110" fill="#00d4ff"/>
+    <rect x="15" y="180" width="25" height="70" fill="#00d4ff"/>
+    
+    <!-- Smoke stacks -->
+    <rect x="55" y="90" width="8" height="60" fill="#00d4ff"/>
+    <rect x="80" y="70" width="8" height="50" fill="#00d4ff"/>
+    <rect x="102" y="85" width="8" height="55" fill="#00d4ff"/>
+  </g>
+  
+  <!-- Decorative elements - Factory on right (mirror) -->
+  <g opacity="0.1">
+    <!-- Factory buildings on right -->
+    <rect x="1080" y="150" width="40" height="100" fill="#00d4ff"/>
+    <rect x="1100" y="120" width="30" height="130" fill="#00d4ff"/>
+    <rect x="1120" y="140" width="35" height="110" fill="#00d4ff"/>
+    <rect x="1145" y="180" width="25" height="70" fill="#00d4ff"/>
+    
+    <!-- Smoke stacks -->
+    <rect x="1085" y="90" width="8" height="60" fill="#00d4ff"/>
+    <rect x="1110" y="70" width="8" height="50" fill="#00d4ff"/>
+    <rect x="1132" y="85" width="8" height="55" fill="#00d4ff"/>
+  </g>
+  
+  <!-- Central decorative circuit -->
+  <g opacity="0.15">
+    <circle cx="200" cy="100" r="15" fill="none" stroke="#00d4ff" stroke-width="2"/>
+    <line x1="215" y1="100" x2="250" y2="100" stroke="#00d4ff" stroke-width="2"/>
+    <circle cx="265" cy="100" r="10" fill="none" stroke="#00d4ff" stroke-width="2"/>
+    <line x1="275" y1="100" x2="310" y2="150" stroke="#00d4ff" stroke-width="2"/>
+    <circle cx="325" cy="165" r="12" fill="none" stroke="#00d4ff" stroke-width="2"/>
+    <line x1="325" y1="177" x2="325" y2="220" stroke="#00d4ff" stroke-width="2"/>
+    <circle cx="325" cy="235" r="10" fill="none" stroke="#00d4ff" stroke-width="2"/>
+  </g>
+  
+  <!-- Main content container -->
+  <g filter="url(#shadow)">
+    <!-- Left section - Icon area -->
+    <circle cx="120" cy="200" r="60" fill="url(#accentGradient)" opacity="0.2"/>
+    <circle cx="120" cy="200" r="55" fill="none" stroke="url(#accentGradient)" stroke-width="3"/>
+    
+    <!-- Factory icon -->
+    <g transform="translate(120, 200)">
+      <!-- Factory building outline -->
+      <rect x="-20" y="-15" width="40" height="35" fill="none" stroke="#00d4ff" stroke-width="2.5"/>
+      <!-- Roof -->
+      <polygon points="-22,-15 0,-28 22,-15" fill="none" stroke="#00d4ff" stroke-width="2.5"/>
+      <!-- Windows -->
+      <rect x="-15" y="-8" width="7" height="7" fill="#00d4ff"/>
+      <rect x="-2" y="-8" width="7" height="7" fill="#00d4ff"/>
+      <rect x="11" y="-8" width="7" height="7" fill="#00d4ff"/>
+      <rect x="-15" y="2" width="7" height="7" fill="#00d4ff"/>
+      <rect x="-2" y="2" width="7" height="7" fill="#00d4ff"/>
+      <rect x="11" y="2" width="7" height="7" fill="#00d4ff"/>
+      <!-- Chimney -->
+      <rect x="-25" y="-25" width="4" height="10" fill="none" stroke="#00d4ff" stroke-width="2"/>
+      <rect x="21" y="-25" width="4" height="10" fill="none" stroke="#00d4ff" stroke-width="2"/>
+      <!-- Door -->
+      <rect x="-5" y="13" width="10" height="12" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+    </g>
+  </g>
+  
+  <!-- Main title -->
+  <text x="280" y="140" font-family="'Segoe UI', Arial, sans-serif" font-size="56" font-weight="700" fill="#ffffff" letter-spacing="1">
+    Smart Factory
+  </text>
+  <text x="280" y="200" font-family="'Segoe UI', Arial, sans-serif" font-size="56" font-weight="700" fill="#ffffff" letter-spacing="1">
+    Predictive Maintenance
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="280" y="250" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="400" fill="#a8dadc" letter-spacing="0.5">
+    AI-Powered Failure Prediction • XGBoost • SHAP Explainability
+  </text>
+  
+  <!-- Badge section -->
+  <g>
+    <!-- Badge 1 -->
+    <rect x="280" y="290" width="140" height="35" rx="20" fill="none" stroke="url(#accentGradient)" stroke-width="2"/>
+    <text x="350" y="312" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#00d4ff" text-anchor="middle">
+      🤖 ML-Powered
+    </text>
+    
+    <!-- Badge 2 -->
+    <rect x="450" y="290" width="140" height="35" rx="20" fill="none" stroke="url(#accentGradient)" stroke-width="2"/>
+    <text x="520" y="312" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#00d4ff" text-anchor="middle">
+      📊 Interactive
+    </text>
+    
+    <!-- Badge 3 -->
+    <rect x="620" y="290" width="140" height="35" rx="20" fill="none" stroke="url(#accentGradient)" stroke-width="2"/>
+    <text x="690" y="312" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#00d4ff" text-anchor="middle">
+      🚀 Production
+    </text>
+    
+    <!-- Badge 4 -->
+    <rect x="790" y="290" width="140" height="35" rx="20" fill="none" stroke="url(#accentGradient)" stroke-width="2"/>
+    <text x="860" y="312" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#00d4ff" text-anchor="middle">
+      💡 Explainable
+    </text>
+  </g>
+  
+  <!-- Bottom accent line -->
+  <rect x="0" y="380" width="1200" height="20" fill="url(#accentGradient)" opacity="0.3"/>
+  <rect x="0" y="390" width="1200" height="10" fill="url(#accentGradient)" opacity="0.15"/>
+  
+  <!-- Floating data points (animated-ready) -->
+  <g opacity="0.08">
+    <circle cx="950" cy="80" r="8" fill="#00d4ff"/>
+    <circle cx="1000" cy="130" r="6" fill="#00d4ff"/>
+    <circle cx="980" cy="180" r="7" fill="#00d4ff"/>
+    <circle cx="1020" cy="240" r="5" fill="#00d4ff"/>
+    <circle cx="960" cy="280" r="9" fill="#00d4ff"/>
+    
+    <!-- Connecting lines -->
+    <line x1="950" y1="80" x2="1000" y2="130" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="1000" y1="130" x2="980" y2="180" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="980" y1="180" x2="1020" y2="240" stroke="#00d4ff" stroke-width="1"/>
+    <line x1="1020" y1="240" x2="960" y2="280" stroke="#00d4ff" stroke-width="1"/>
+  </g>
+</svg>

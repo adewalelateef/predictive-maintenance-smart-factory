@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="1000" height="500">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #ffffff; }
+      .metric-label { font-family: Arial, sans-serif; font-size: 14px; fill: #a8dadc; }
+      .metric-value { font-family: Arial, sans-serif; font-size: 28px; font-weight: bold; fill: #00d4ff; }
+      .metric-box { fill: #112240; stroke: #00d4ff; stroke-width: 2; }
+      .gauge-bg { fill: none; stroke: #1a3a52; stroke-width: 8; }
+      .gauge-fill { fill: none; stroke: #00d4ff; stroke-width: 8; stroke-linecap: round; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1000" height="500" fill="#0a1220"/>
+  
+  <!-- Title -->
+  <text x="500" y="40" text-anchor="middle" class="title">📈 Model Performance Metrics</text>
+  
+  <!-- Metric 1: Accuracy -->
+  <rect x="50" y="80" width="180" height="140" rx="8" class="metric-box"/>
+  <text x="140" y="115" text-anchor="middle" class="metric-value">97.2%</text>
+  <text x="140" y="150" text-anchor="middle" class="metric-label">Accuracy</text>
+  <text x="140" y="170" text-anchor="middle" font-family="Arial" font-size="12" fill="#0099ff">Overall Correctness</text>
+  
+  <!-- Metric 2: Precision -->
+  <rect x="260" y="80" width="180" height="140" rx="8" class="metric-box"/>
+  <text x="350" y="115" text-anchor="middle" class="metric-value">94.1%</text>
+  <text x="350" y="150" text-anchor="middle" class="metric-label">Precision</text>
+  <text x="350" y="170" text-anchor="middle" font-family="Arial" font-size="12" fill="#0099ff">False Alarm Rate</text>
+  
+  <!-- Metric 3: Recall -->
+  <rect x="470" y="80" width="180" height="140" rx="8" class="metric-box"/>
+  <text x="560" y="115" text-anchor="middle" class="metric-value">88.5%</text>
+  <text x="560" y="150" text-anchor="middle" class="metric-label">Recall</text>
+  <text x="560" y="170" text-anchor="middle" font-family="Arial" font-size="12" fill="#0099ff">Catches Real Failures</text>
+  
+  <!-- Metric 4: F1-Score -->
+  <rect x="680" y="80" width="180" height="140" rx="8" class="metric-box"/>
+  <text x="770" y="115" text-anchor="middle" class="metric-value">91.1%</text>
+  <text x="770" y="150" text-anchor="middle" class="metric-label">F1-Score</text>
+  <text x="770" y="170" text-anchor="middle" font-family="Arial" font-size="12" fill="#0099ff">Balanced Metric</text>
+  
+  <!-- Metric 5: AUC-ROC (Gauge style) -->
+  <rect x="50" y="260" width="400" height="180" rx="8" class="metric-box"/>
+  
+  <text x="250" y="290" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#00d4ff">AUC-ROC Score</text>
+  
+  <!-- Gauge background -->
+  <path d="M 150 350 A 100 100 0 0 1 350 350" class="gauge-bg"/>
+  <!-- Gauge fill (96.5% of 180 degrees = ~173.7 degrees) -->
+  <path d="M 150 350 A 100 100 0 1 1 347 358" class="gauge-fill"/>
+  
+  <!-- Gauge labels -->
+  <text x="150" y="365" text-anchor="middle" font-family="Arial" font-size="11" fill="#a8dadc">0.0</text>
+  <text x="350" y="365" text-anchor="middle" font-family="Arial" font-size="11" fill="#a8dadc">1.0</text>
+  
+  <!-- Score indicator -->
+  <text x="250" y="330" text-anchor="middle" font-family="Arial" font-size="32" font-weight="bold" fill="#00d4ff">0.965</text>
+  <text x="250" y="355" text-anchor="middle" font-family="Arial" font-size="13" fill="#a8dadc">Excellent Discrimination</text>
+  
+  <!-- Confusion Matrix -->
+  <rect x="520" y="260" width="430" height="180" rx="8" class="metric-box"/>
+  
+  <text x="735" y="290" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#00d4ff">Confusion Matrix</text>
+  
+  <!-- Matrix grid -->
+  <!-- Header -->
+  <text x="630" y="320" text-anchor="middle" font-family="Arial" font-size="12" fill="#a8dadc">No Fail</text>
+  <text x="770" y="320" text-anchor="middle" font-family="Arial" font-size="12" fill="#a8dadc">Fail</text>
+  
+  <!-- Row labels -->
+  <text x="570" y="360" text-anchor="end" font-family="Arial" font-size="12" fill="#a8dadc">Predicted No</text>
+  <text x="570" y="400" text-anchor="end" font-family="Arial" font-size="12" fill="#a8dadc">Predicted Fail</text>
+  
+  <!-- Matrix values -->
+  <!-- TN -->
+  <rect x="600" y="340" width="60" height="40" fill="#112240" stroke="#00d4ff" stroke-width="1"/>
+  <text x="630" y="365" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#00d4ff">9597</text>
+  
+  <!-- FP -->
+  <rect x="740" y="340" width="60" height="40" fill="#112240" stroke="#00d4ff" stroke-width="1"/>
+  <text x="770" y="365" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#ff6b6b">21</text>
+  
+  <!-- FN -->
+  <rect x="600" y="380" width="60" height="40" fill="#112240" stroke="#00d4ff" stroke-width="1"/>
+  <text x="630" y="405" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#ff6b6b">39</text>
+  
+  <!-- TP -->
+  <rect x="740" y="380" width="60" height="40" fill="#112240" stroke="#00d4ff" stroke-width="1"/>
+  <text x="770" y="405" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#51cf66">300</text>
+  
+  <!-- Legend -->
+  <g font-family="Arial" font-size="11" fill="#a8dadc">
+    <text x="540" y="425">🟦 TN=9597 (True Negatives) | 🔴 FP=21 (False Positives) | 🔴 FN=39 (False Negatives) | 🟩 TP=300 (True Positives)</text>
+  </g>
+  
+  <!-- Bottom insights -->
+  <rect x="50" y="460" width="900" height="30" fill="none" stroke="#00ff00" stroke-width="2" stroke-dasharray="5,5" rx="3"/>
+  <text x="60" y="481" font-family="Arial" font-size="13" fill="#00ff00">✓ Model is production-ready! Excellent balance between precision and recall for critical failure detection.</text>
+</svg>

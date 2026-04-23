@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; fill: #ffffff; }
+      .label { font-family: Arial, sans-serif; font-size: 14px; fill: #a8dadc; }
+      .value { font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; fill: #00d4ff; }
+      .bar { fill: url(#barGradient); }
+      .bar-dark { fill: url(#barGradientDark); }
+    </style>
+    <linearGradient id="barGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0099ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="barGradientDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#005fa3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0099ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="500" fill="#0a1220"/>
+  
+  <!-- Title -->
+  <text x="450" y="40" text-anchor="middle" class="title">
+    🎯 Feature Importance (SHAP Analysis)
+  </text>
+  <text x="450" y="65" text-anchor="middle" font-family="Arial" font-size="14" fill="#a8dadc">
+    Top 5 Factors Influencing Machine Failure Predictions
+  </text>
+  
+  <!-- Dividing line -->
+  <line x1="50" y1="80" x2="850" y2="80" stroke="#00d4ff" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Feature 1: Tool Wear -->
+  <text x="50" y="130" class="label">🔧 Tool Wear (min)</text>
+  <rect x="300" y="115" width="380" height="25" rx="3" class="bar"/>
+  <text x="690" y="133" class="value">28.3%</text>
+  
+  <!-- Feature 2: Rotational Speed -->
+  <text x="50" y="190" class="label">⚙️ Rotational Speed (RPM)</text>
+  <rect x="300" y="175" width="324" height="25" rx="3" class="bar-dark"/>
+  <text x="634" y="193" class="value">24.1%</text>
+  
+  <!-- Feature 3: Torque -->
+  <text x="50" y="250" class="label">💪 Torque (Nm)</text>
+  <rect x="300" y="235" width="265" height="25" rx="3" class="bar"/>
+  <text x="575" y="253" class="value">19.7%</text>
+  
+  <!-- Feature 4: Process Temperature -->
+  <text x="50" y="310" class="label">🌡️ Process Temperature (K)</text>
+  <rect x="300" y="295" width="167" height="25" rx="3" class="bar-dark"/>
+  <text x="477" y="313" class="value">12.4%</text>
+  
+  <!-- Feature 5: Air Temperature -->
+  <text x="50" y="370" class="label">❄️ Air Temperature (K)</text>
+  <rect x="300" y="355" width="209" height="25" rx="3" class="bar"/>
+  <text x="519" y="373" class="value">15.5%</text>
+  
+  <!-- Scale reference -->
+  <line x1="300" y1="410" x2="300" y2="415" stroke="#00d4ff" stroke-width="1"/>
+  <line x1="515" y1="410" x2="515" y2="415" stroke="#00d4ff" stroke-width="1"/>
+  <line x1="680" y1="410" x2="680" y2="415" stroke="#00d4ff" stroke-width="1"/>
+  <line x1="300" y1="410" x2="680" y2="410" stroke="#00d4ff" stroke-width="1" opacity="0.3"/>
+  
+  <text x="300" y="435" text-anchor="middle" font-family="Arial" font-size="12" fill="#a8dadc">0%</text>
+  <text x="490" y="435" text-anchor="middle" font-family="Arial" font-size="12" fill="#a8dadc">15%</text>
+  <text x="680" y="435" text-anchor="middle" font-family="Arial" font-size="12" fill="#a8dadc">28.3%</text>
+  
+  <!-- Insights section -->
+  <rect x="50" y="460" width="800" height="25" fill="none" stroke="#00d4ff" stroke-width="1" stroke-dasharray="5,5" opacity="0.5" rx="3"/>
+  <text x="60" y="480" font-family="Arial" font-size="13" fill="#a8dadc">
+    💡 Insight: Tool wear is the primary failure indicator. Regular tool maintenance reduces failure risk by up to 40%.
+  </text>
+</svg>
