@@ -10,4 +10,4 @@ matplotlib==3.8.3          # Static plots
 seaborn==0.13.1            # Statistical viz
 altair==5.2.0              # Altair charts
 requests==2.31.0           # HTTP requests
-python-dotenv==1.0.0       # Environment config
+python-dotenv==1.0.0       # Environment variables
