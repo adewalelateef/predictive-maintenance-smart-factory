@@ -75,15 +75,15 @@ def plot_cost_comparison(reactive_cost: float, predictive_cost: float) -> None:
     colors = ["#d62728", "#2ecc71"]
     
     bars = ax.bar(categories, costs, color=colors, edgecolor="black", linewidth=1.5)
-    ax.set_ylabel("Annual Cost ($)", fontsize=11)
+    ax.set_ylabel("Annual Cost (€)", fontsize=11)
     ax.set_title("Cost Comparison: Reactive vs Predictive Maintenance", 
                  fontsize=12, fontweight="bold")
-    ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: f"${x/1000:.0f}K"))
+    ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: f"€{x/1000:.0f}K"))
     
     for bar in bars:
         height = bar.get_height()
         ax.text(bar.get_x() + bar.get_width()/2., height,
-                f'${height/1000:.1f}K',
+                f'€{height/1000:.1f}K',
                 ha='center', va='bottom', fontweight='bold')
     
     plt.xticks(rotation=15, ha='right')
@@ -106,14 +106,14 @@ def plot_roi_projection(years: list, cumulative_savings: list) -> None:
     ax.fill_between(years, cumulative_savings, alpha=0.3, color="#2ecc71")
     
     ax.set_xlabel("Year", fontsize=11)
-    ax.set_ylabel("Cumulative Savings ($)", fontsize=11)
+    ax.set_ylabel("Cumulative Savings (€)", fontsize=11)
     ax.set_title("ROI Projection", fontsize=12, fontweight="bold")
-    ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: f"${x/1000:.0f}K"))
+    ax.yaxis.set_major_formatter(FuncFormatter(lambda x, p: f"€{x/1000:.0f}K"))  
     ax.grid(axis='y', alpha=0.3)
     ax.set_xticks(years)
     
     for year, savings in zip(years, cumulative_savings):
-        ax.text(year, savings, f"${savings/1000:.0f}K",
+        ax.text(year, savings, f"€{savings/1000:.0f}K",
                 ha='center', va='bottom', fontweight='bold', fontsize=10)
     
     plt.tight_layout()

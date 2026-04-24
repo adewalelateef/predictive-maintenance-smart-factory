@@ -22,11 +22,11 @@ def render():
     st.subheader("Key Assumptions")
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("Cost per Unplanned Failure", f"${COST_PER_FAILURE:,}", "Repair + downtime")
+        st.metric("Cost per Unplanned Failure", f"€{COST_PER_FAILURE:,}", "Repair + downtime")
     with col2:
         st.metric("Downtime per Failure", f"{DOWNTIME_PER_FAILURE} hours", "Lost production")
     with col3:
-        st.metric("Hourly Production Value", f"${HOURLY_PRODUCTION_VALUE:,}", "Industrial CNC milling output")
+        st.metric("Hourly Production Value", f"€{HOURLY_PRODUCTION_VALUE:,}", "Industrial CNC milling output")
 
     st.markdown("---")
 
@@ -52,7 +52,7 @@ def render():
             f"{int(FAILURE_PREVENTION_RATE * 100)}% reduction"
         )
     with col2:
-        st.metric("Estimated Annual Savings", f"${total_savings:,.0f}", "💰")
+        st.metric("Estimated Annual Savings", f"€{total_savings:,.0f}", "💰")
 
     st.progress(FAILURE_PREVENTION_RATE)
     st.caption(f"Based on model recall and conservative industry benchmarks")
@@ -75,7 +75,7 @@ def render():
 
     st.info(
         "In a real factory environment, deploying this system across multiple CNC machines "
-        "could generate **$100,000 – $300,000+** in annual savings."
+        "could generate **€100,000 – €300,000+** in annual savings."
     )
 
     # ROI Projection
@@ -89,7 +89,7 @@ def render():
     ]
     plot_roi_projection(years, cumulative_savings)
 
-    st.markdown(f"**3-Year Total Savings: ${cumulative_savings[-1]:,.0f}**")
+    st.markdown(f"**3-Year Total Savings: €{cumulative_savings[-1]:,.0f}**")
 
     # Qualitative Benefits
     st.markdown("---")
