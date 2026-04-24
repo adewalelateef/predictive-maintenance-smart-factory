@@ -24,7 +24,7 @@
 This project implements an **Industry 4.0** solution for predictive maintenance in smart factories. Using machine learning and SHAP explainability, it predicts failures in CNC milling machines **before they occur**, enabling:
 
 - 🎯 **65% Failure Prevention Rate** through early warnings
-- 💰 **$12,025 Average Savings** per prevented failure
+- 💰 **€12,025 Average Savings** per prevented failure
 - ⚡ **Real-time Risk Assessment** with explainable predictions
 - 📊 **Interactive Dashboard** with multiple analytical perspectives
 - 🔬 **Model Explainability** using SHAP values for trustworthy AI
@@ -310,10 +310,10 @@ Top contributing factors for failure prediction:
 
 ### Business Impact
 
-- **Average Cost per Failure**: $18,500
+- **Average Cost per Failure**: €18,500
 - **Downtime per Failure**: 14 hours
 - **Failure Prevention Rate**: 65% (based on recall)
-- **Average Savings per Prevented Failure**: $12,025
+- **Average Savings per Prevented Failure**: €12,025
 - **ROI at Scale**: 250-400% annually
 
 ---
